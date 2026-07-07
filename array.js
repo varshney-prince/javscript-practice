@@ -97,3 +97,10 @@ let someAreLong = fruits.some(function (fruit) {
   return fruit.length > 6;
 });
 console.log('Some result:', someAreLong);
+
+// 21. reduce() -> array ke saare elements ko ek single value me convert karta hai
+let prices = [100, 200, 300];
+let total = prices.reduce(function (accumulator, currentValue) {
+  return accumulator + currentValue;
+}, 0);
+console.log('Reduce result:', total);
