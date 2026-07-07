@@ -78,3 +78,39 @@ const any3 = Promise.resolve('Success 3');
 Promise.any([any1, any2, any3]).then((value) => {
   console.log('Promise.any result:', value);
 });
+
+// Async/Await kya hota hai?
+// async function hamesha Promise return karta hai.
+// await ka matlab hota hai ki hum promise resolve hone ka wait karenge.
+
+async function fetchData() {
+  return 'Data fetched successfully';
+}
+
+async function showData() {
+  const result = await fetchData();
+  console.log('Async/Await result:', result);
+}
+
+showData();
+
+// Example with delay using async/await
+async function delayedMessage() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return 'Hello after 1 second';
+}
+
+delayedMessage().then((value) => {
+  console.log('Delayed async/await message:', value);
+});
+
+// Error handling with try/catch
+async function getDataWithError() {
+  try {
+    throw new Error('Something went wrong');
+  } catch (error) {
+    console.log('Caught error in async/await:', error.message);
+  }
+}
+
+getDataWithError();
