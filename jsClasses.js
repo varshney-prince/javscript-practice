@@ -27,7 +27,7 @@ const person1 = new Person('Prince', 21);
 person1.greet();
 person1.info();
 
-// Inheritance
+// Inheritance concept
 // Child class parent class ke properties aur methods inherit karti hai.
 class Student extends Person {
   constructor(name, age, course) {
@@ -44,15 +44,60 @@ const student1 = new Student('Asha', 20, 'JavaScript');
 student1.greet();
 student1.study();
 
-// Static method
-// Static methods class ke object se nahi balki class ke directly call hote hain.
+// Method overriding concept
+// Child class parent class ka method override kar sakti hai.
+class Employee extends Person {
+  constructor(name, age, department) {
+    super(name, age);
+    this.department = department;
+  }
+
+  greet() {
+    console.log(`Hello, I am ${this.name} from ${this.department} department.`);
+  }
+
+  work() {
+    console.log(`${this.name} is working in ${this.department}`);
+  }
+}
+
+const employee1 = new Employee('Riya', 28, 'IT');
+employee1.greet();
+employee1.info();
+employee1.work();
+
+// Multi-level inheritance concept
+// Ek child class dusri child class se inherit kar sakti hai.
+class Manager extends Employee {
+  constructor(name, age, department, teamSize) {
+    super(name, age, department);
+    this.teamSize = teamSize;
+  }
+
+  manage() {
+    console.log(`${this.name} manages a team of ${this.teamSize}`);
+  }
+}
+
+const manager1 = new Manager('Kiran', 35, 'HR', 8);
+manager1.greet();
+manager1.manage();
+
+// Static method concept
+// Static methods class ke object ke bina directly class par call hote hain.
+// Ye methods kisi specific object ke data par depend nahi hote.
 class MathHelper {
   static add(a, b) {
     return a + b;
   }
+
+  static multiply(a, b) {
+    return a * b;
+  }
 }
 
 console.log('Static add:', MathHelper.add(3, 5));
+console.log('Static multiply:', MathHelper.multiply(4, 6));
 
 // Getter and setter
 class Circle {
@@ -74,6 +119,86 @@ console.log('Circle area:', circle.area);
 
 circle.diameter = 10;
 console.log('Updated radius:', circle.radius);
+
+// Encapsulation concept
+// Data ko private rakh kar sirf methods ke through access karna.
+class BankAccount {
+  #balance;
+
+  constructor(initialBalance) {
+    this.#balance = initialBalance;
+  }
+
+  deposit(amount) {
+    if (amount > 0) {
+      this.#balance += amount;
+    }
+  }
+
+  withdraw(amount) {
+    if (amount > 0 && amount <= this.#balance) {
+      this.#balance -= amount;
+    }
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount(1000);
+account.deposit(500);
+account.withdraw(200);
+console.log('Encapsulation balance:', account.getBalance());
+
+// Abstraction concept
+// Complex implementation ko hide karke sirf important behavior expose karna.
+class Vehicle {
+  start() {
+    throw new Error('start() method must be implemented');
+  }
+
+  stop() {
+    throw new Error('stop() method must be implemented');
+  }
+}
+
+class Car extends Vehicle {
+  start() {
+    console.log('Car started');
+  }
+
+  stop() {
+    console.log('Car stopped');
+  }
+}
+
+const myCar = new Car();
+myCar.start();
+myCar.stop();
+
+// Polymorphism concept
+// Same method different classes me different behavior ke saath.
+class Animal {
+  makeSound() {
+    console.log('Animal sound');
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log('Bark');
+  }
+}
+
+class Cat extends Animal {
+  makeSound() {
+    console.log('Meow');
+  }
+}
+
+const animals = [new Animal(), new Dog(), new Cat()];
+animals.forEach((animal) => animal.makeSound());
 
 // Class ke important points
 // 1. class keyword se class define hoti hai
